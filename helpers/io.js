@@ -9,7 +9,8 @@ function io(server) {
 	    })
 
 	    socket.on('message', function(data){
-	        console.log(data);
+	    	console.log(data);
+	        socket.emit('message', data);
 	    })
 	})
 }
