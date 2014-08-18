@@ -5,9 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var chat = require('./routes/chat');
-
 var app = express();
 var server = require(path.join(__dirname, 'bin/www'))(app, 9000);
 var io = require('socket.io')(server);
@@ -24,9 +21,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
-// route setup
-app.use('/chat', chat);
-app.use('/', routes);
+// router setup
+app.use('/public', require('./routes/public'));
+app.use('/private', require('./routes/private'))
+app.use(require('./routes/index'));
 
 // socket.io 
 io.on('connection', function(socket) {

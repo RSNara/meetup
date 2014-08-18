@@ -5,5 +5,11 @@ block javascripts
 	script(src="/socket.io/socket.io.js")
 
 block content
+
+	if (mode === 'public') 
+		h1= "Welcome to your Public MeetUp!"
+	else if (mode === 'private') 
+		h1= "Welcome to your Private MeetUp!"
+
 	script.
 		var socket = io();
