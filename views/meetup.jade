@@ -6,10 +6,8 @@ block javascripts
 
 block content
 
-	if (mode === 'public') 
-		h1= "Welcome to your public MeetUp!"
-	else if (mode === 'private') 
-		h1= "Welcome to your private MeetUp!"
+	block greeting
+		h1= "Welcome to your MeetUp!"
 
 	#messages
 
@@ -18,4 +16,4 @@ block content
 		input#message(name="message", type="text")
 		input(type="submit", value="Send")
 
-	script(src="/javascripts/meetup.js")
+	block logic

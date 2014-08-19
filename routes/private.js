@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('*', function(request, response) {
-	response.render('meetup', { mode: 'private' });
+	response.render('private');
 })
 
 module.exports = router;

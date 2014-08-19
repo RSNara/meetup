@@ -1,18 +1,25 @@
-function io(server) {
-	// socket.io 
-	server.on('connection', function(socket) {
-	    
-	    console.log('user connected!');
-	    
-	    socket.on('disconnect', function() {
-	        console.log('user disconnected!');
-	    })
+function handleIO(io) {
+	
+	// two seperate namespaces for the private and public connections
+	var privateIO = io.of('/private');
+	var publicIO = io.of('/public');
 
-	    socket.on('message', function(data){
-	    	console.log(data);
-	        socket.emit('message', data);
-	    })
+	privateIO.on('connection', function(socket) {
+		console.log('private user connected!');
+		socket.on('disconnect', function() {
+			console.log('private user disconnected');
+		})
 	})
+
+	publicIO.on('connection', function(socket) {
+		console.log('public user connected');
+		socket.on('disconnect', function() {
+			console.log('public user disconnected');
+		})
+	})
+
+	
+
 }
 
-module.exports = io;
+module.exports = handleIO;

@@ -1,0 +1,9 @@
+extends meetup
+
+block greeting
+	h1= "Welcome to your public MeetUp!"
+
+block logic
+	script(src="/javascripts/meetup.js")
+	script.
+		handleIO('/public');

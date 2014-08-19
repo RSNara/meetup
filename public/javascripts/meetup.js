@@ -1,6 +1,6 @@
-$(function(){
+function handleIO(namespace) {
 
-	var socket = io();
+	var socket = io(namespace);
 
 	$("#input").submit(function (e){
 		socket.emit('message', $("#message").val());
@@ -12,4 +12,4 @@ $(function(){
 		$("#messages").append("<p>" + data + "</p>")
 	})
 
-})
+}
