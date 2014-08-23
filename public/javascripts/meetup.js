@@ -2,7 +2,7 @@ function handleIO(namespace) {
 
 	var socket = io(namespace);
 
-	$("#input").submit(function (e){
+	$("#toolbar").submit(function (e){
 		socket.emit('message', $("#message").val());
 		$("#message").val('');
 		e.preventDefault();

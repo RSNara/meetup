@@ -13,9 +13,9 @@ block content
 
 	#messages
 
-	form#input
+	form#toolbar(autocomplete="off")
 		label(for="message") Message:     
 		input#message(name="message", type="text")
-		input(type="submit", value="Send")
+		input#send(type="submit", value="Send")
 
 	block logic
