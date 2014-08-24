@@ -26,8 +26,10 @@ router.get('/:room', function (request, response) {
 	});
 })
 
-router.get('*', function(request, response) {
-	response.render('public');
+router.get('*', function (request, response) {
+	Room.find({}, function (error, docs) {
+		response.end(JSON.stringify(docs));
+	})
 })
 
 module.exports = router;
