@@ -1,3 +1,8 @@
+var mongoose = require('mongoose');
+
+var Room = mongoose.model('Room');
+var Message = mongoose.model('Message');
+
 function handleChat(io) {
 	
 	// two seperate namespaces for the private and public connections
@@ -17,8 +22,13 @@ function handleChat(io) {
 		socket.name = socket.id;
 
 		socket.on('join request', function(options) {
-			socket.room = options.room || socket.id;
-			socket.name = options.name || socket.id;
+			socket.room = new String(options.room || socket.id);
+			socket.name = new String(options.name || socket.id);
+
+			Room.findOne({ name: socket.room }, function(error, doc){
+				socket.room.id = doc._id;
+			});
+
 			socket.join(socket.room);
 		})
 
@@ -27,11 +37,24 @@ function handleChat(io) {
 		})
 
 		socket.on('message', function(data) {
-			console.log({ 
-				name: socket.name, 
-				message: data
-			})
 
+			//console.log(socket.room.id);
+
+			/* save the message */
+			Message.create({ 
+				author: socket.name, 
+				value: data, 
+				room: socket.room.id 
+			}, function (error, doc) {
+				if (error) return error;
+				Room.update({ name: socket.room }, {
+					$push: { messages: doc._id }
+				}, function (error, number_modified) {
+					if (error) return error;
+				});
+			});
+
+			/* emit the message */
 			socket.to(socket.room).emit('message', { 
 				name: socket.name, 
 				message: data
