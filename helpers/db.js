@@ -4,8 +4,9 @@ var Schema = mongoose.Schema;
 mongoose.connect('mongodb://localhost/meetup');
 
 var Message = new Schema({
-	value: 'string',
+	body: 'string',
 	author: 'string',
+	date: { type: 'string', default: Date.now},
 	room: { type: Schema.Types.ObjectId, ref: 'Room' }
 });
 

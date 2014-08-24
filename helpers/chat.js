@@ -23,11 +23,18 @@ function handleChat(io) {
 
 		socket.on('join request', function(options) {
 			socket.room = new String(options.room || socket.id);
-			socket.name = new String(options.name || socket.id);
+			socket.name = options.name || socket.id;
 
-			Room.findOne({ name: socket.room }, function(error, doc){
-				socket.room.id = doc._id;
-			});
+			// fetch the chat history and send it to user
+			Room
+				.findOne({ name: socket.room })
+				.select('messages')
+				.populate('messages', 'author body date -_id')
+				.exec(function (error, doc){
+					if (error) return error;
+					socket.room.id = doc._id;
+					socket.emit('chat history', doc.messages);
+				});
 
 			socket.join(socket.room);
 		})
@@ -38,20 +45,23 @@ function handleChat(io) {
 
 		socket.on('message', function(data) {
 
-			//console.log(socket.room.id);
-
 			/* save the message */
-			Message.create({ 
+			var message = { 
 				author: socket.name, 
-				value: data, 
+				body: data, 
 				room: socket.room.id 
-			}, function (error, doc) {
+			};
+
+			Message.create(message, function (error, doc) {
+				
 				if (error) return error;
-				Room.update({ name: socket.room }, {
-					$push: { messages: doc._id }
-				}, function (error, number_modified) {
-					if (error) return error;
-				});
+				
+				Room
+					.update({ name: socket.room }, {
+						$push: { messages: doc._id }
+					}).exec(function (error) {
+						if (error) return error;
+					});
 			});
 
 			/* emit the message */
