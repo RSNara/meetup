@@ -70,6 +70,12 @@ function handleChat(io) {
 				author: socket.name, 
 				body: data
 			})
+
+			/* emit the message to the user so he can see it */
+			socket.emit('message', {
+				author: socket.name,
+				body: data
+			})
 		})
 	})
 
