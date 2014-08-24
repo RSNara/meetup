@@ -2,6 +2,10 @@ function handleChats(namespace, room) {
 
 	var socket = io(namespace);
 
+	function showMessage(message){
+		$("#chatHistory").append("<div>" + message.author + ": " + message.body + "</div>")
+	}
+
 	$("form > button#send").one('click', function () {
 
 		socket.emit("join request", {
@@ -24,8 +28,14 @@ function handleChats(namespace, room) {
 	    (e.which === 13) && $("form > button#send").click();
 	})
 
-	socket.on("message", function(data){
-		$("#chatHistory").append("<div>" + data.author + ": " + data.body + "</div>")
+	socket.on("message", function (message){
+		showMessage(message);
 	})
+
+	socket.on("chat history", function (history){
+		history.forEach(showMessage);
+	})
+
+
 
 }

@@ -21,6 +21,7 @@ function handleChat(io) {
 		socket.room = socket.id;
 		socket.name = socket.id;
 
+		// an event emitted when the user submits his name
 		socket.on('join request', function(options) {
 			socket.room = new String(options.room || socket.id);
 			socket.name = options.name || socket.id;
