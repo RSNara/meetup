@@ -21,6 +21,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
+// database setup
+require(path.join(__dirname, 'helpers/db'));
+
 // router setup
 app.use('/public', require('./routes/public'));
 app.use('/private', require('./routes/private'))
