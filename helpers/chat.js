@@ -14,9 +14,11 @@ function handleChat(io) {
 	publicIO.on('connection', function(socket) {
 		
 		socket.room = socket.id;
+		socket.name = socket.id;
 
-		socket.on('join request', function(room) {
-			socket.room = room || socket.id;
+		socket.on('join request', function(options) {
+			socket.room = options.room || socket.id;
+			socket.name = options.name || socket.id;
 			socket.join(socket.room);
 		})
 
@@ -25,7 +27,15 @@ function handleChat(io) {
 		})
 
 		socket.on('message', function(data) {
-			socket.to(socket.room).emit('message', data);
+			console.log({ 
+				name: socket.name, 
+				message: data
+			})
+
+			socket.to(socket.room).emit('message', { 
+				name: socket.name, 
+				message: data
+			})
 		})
 	})
 
