@@ -14,7 +14,7 @@ function handleChats(namespace, room) {
 		});
 
 		$("form > button#send").html("Send");
-		$("form > label").html("Message: ");
+		$("form > label").html($("form > input#message").val() + ": ");
 		$("form > input#message").val('');
 
 		$("form > button#send").click(function (e){
@@ -35,7 +35,5 @@ function handleChats(namespace, room) {
 	socket.on("chat history", function (history){
 		history.forEach(showMessage);
 	})
-
-
 
 }
