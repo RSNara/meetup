@@ -30,7 +30,7 @@ app.use('/private', require('./routes/private'))
 app.use(require('./routes/index'));
 
 // socket.io 
-require(path.join(__dirname, 'helpers/handleIO'))(io);
+require(path.join(__dirname, 'helpers/chat'))(io);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

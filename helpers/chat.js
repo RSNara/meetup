@@ -1,4 +1,4 @@
-function handleIO(io) {
+function handleChat(io) {
 	
 	// two seperate namespaces for the private and public connections
 	var privateIO = io.of('/private');
@@ -12,14 +12,23 @@ function handleIO(io) {
 	})
 
 	publicIO.on('connection', function(socket) {
-		console.log('public user connected');
+		
+		socket.room = socket.id;
+
+		socket.on('join request', function(room) {
+			socket.room = room || socket.id;
+			socket.join(socket.room);
+		})
+
 		socket.on('disconnect', function() {
 			console.log('public user disconnected');
 		})
-	})
 
-	
+		socket.on('message', function(data) {
+			socket.to(socket.room).emit('message', data);
+		})
+	})
 
 }
 
-module.exports = handleIO;
+module.exports = handleChat;

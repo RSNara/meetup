@@ -1,9 +1,12 @@
 extends meetup
 
 block greeting
-	h1= "Welcome to your public MeetUp!"
+	if (! name)
+		h1= "Welcome to your public MeetUp!"
+	else 
+		h1= "Welcome to " + name + "!"
 
 block logic
-	script(src="/javascripts/meetup.js")
+	script(src="/javascripts/chats.js")
 	script.
-		handleIO('/public');
+		handleChats('/public', "#{name}");
