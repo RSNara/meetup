@@ -5,9 +5,10 @@ var router = express.Router();
 var Room = mongoose.model('Room');
 
 // make sure that if the room already exists, we simply redirect the user
-router.post('/:room', function (request, response) {
+router.post('/:room', function (request, response, next) {
 	
 	Room.findOne({ name: request.params.room }, function (error, doc) {
+		if (error) return next(error);
 
 		if (! doc) {
 			Room.create({ name: request.params.room }, function (error, docs) {
@@ -22,8 +23,9 @@ router.post('/:room', function (request, response) {
 
 })
 
-router.get('/:room', function (request, response) {
+router.get('/:room', function (request, response, next) {
 	Room.findOne({ name: request.params.room }, function (error, doc) {
+		if (error) return next(error);
 		if (! doc) { 
 			response.redirect('/'); 
 		} else {
@@ -32,8 +34,9 @@ router.get('/:room', function (request, response) {
 	});
 })
 
-router.get('*', function (request, response) {
+router.get('*', function (request, response, next) {
 	Room.find({}, function (error, docs) {
+		if (error) return next(error);
 		response.end(JSON.stringify(docs));
 	});
 })
