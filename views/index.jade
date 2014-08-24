@@ -1,5 +1,14 @@
 extends layout
 
+block javascripts
+	script(src="/jquery/dist/jquery.min.js")
+	script(src="/javascripts/home.js")
+
 block content
-	h1= title
-	p Welcome to #{title}
+
+	h1= "Welcome to your MeetUp!"
+
+	form#meetup
+		input#roomName(type="text")
+		input#public(type="button", value="Public")
+		input#private(type="button", value="Private", disabled="disabled")
