@@ -25,7 +25,7 @@ function handleChats(namespace, room) {
 	})
 
 	socket.on("message", function(data){
-		$("#chatHistory").append("<div>" + data.name + ": " + data.message + "</div>")
+		$("#chatHistory").append("<div>" + data.author + ": " + data.body + "</div>")
 	})
 
 }

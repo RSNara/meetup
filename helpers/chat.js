@@ -66,8 +66,8 @@ function handleChat(io) {
 
 			/* emit the message */
 			socket.to(socket.room).emit('message', { 
-				name: socket.name, 
-				message: data
+				author: socket.name, 
+				body: data
 			})
 		})
 	})
