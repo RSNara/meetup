@@ -3,6 +3,7 @@ function handleChats(namespace, room) {
 	var socket = io(namespace);
 
 	function showMessage(message){
+		$("#chatHistory").append("<blockquote><p>" + message.body + "</p><footer>" + message.author + "</footer></blockquote>");
 		$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);
 	}
 
