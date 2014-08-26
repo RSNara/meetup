@@ -2,10 +2,6 @@ extends layout
 
 block stylesheets
 
-block javascripts
-	script(src="/jquery/dist/jquery.min.js")
-	script(src="/socket.io/socket.io.js")
-
 block content
 
 	block greeting
@@ -18,4 +14,6 @@ block content
 		input#message(name="message", type="text")
 		button#send(type="button") set
 
+block javascripts
+	script(src="/socket.io/socket.io.js")
 	block logic
