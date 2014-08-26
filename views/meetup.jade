@@ -1,18 +1,23 @@
 extends layout
 
 block stylesheets
+	link(rel="stylesheet", href="/stylesheets/meetup.css")
 
 block content
 
 	block greeting
 		h1= "Welcome to your MeetUp!"
 
-	#chatHistory
+	.container-fluid
+		#chatHistory
 
-	form(autocomplete="off", onsubmit="return false;")
-		label(for="message") name:     
-		input#message(name="message", type="text")
-		button#send(type="button") set
+	nav.navbar.navbar-fixed-bottom.navbar-default
+		form(autocomplete="off", onsubmit="return false;", role="form").navbar-form.navbar-left.container-fluid.fullwidth
+			.row
+				.form-group.col-xs-10
+					input#message(name="message", type="text", placeholder="Enter Username").fullwidth.form-control
+				.form-group.col-xs-2
+					button#send(type="button").btn.btn-default.fullwidth Introduce Myself
 
 block javascripts
 	script(src="/socket.io/socket.io.js")
