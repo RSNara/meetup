@@ -16,6 +16,7 @@ function handleChats(namespace, room) {
 
 		$("form button#send").html("Send");
 		$("form input#message").val("").attr("placeholder", "Enter Message");
+		$("form label[for=message]").text("Enter Message:");
 
 		$("form button#send").click(function (e){
 			socket.emit('message', $("form input#message").val());
