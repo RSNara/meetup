@@ -3,7 +3,7 @@ function handleChats(namespace, room) {
 	var socket = io(namespace);
 
 	function showMessage(message){
-		$("#chatHistory").append("<div>" + message.author + ": " + message.body + "</div>")
+		$("#chatHistory").scrollTop($("#chatHistory")[0].scrollHeight);
 	}
 
 	$("form button#send").one("click", function () {
@@ -14,7 +14,7 @@ function handleChats(namespace, room) {
 		});
 
 		$("form button#send").html("Send");
-		$("form input#message").val("").attr("placeholder", "Enter message");
+		$("form input#message").val("").attr("placeholder", "Enter Message");
 
 		$("form button#send").click(function (e){
 			socket.emit('message', $("form input#message").val());
