@@ -1,13 +1,13 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express         = require('express');
+var path            = require('path');
+var favicon         = require('serve-favicon');
+var logger          = require('morgan');
+var cookieParser    = require('cookie-parser');
+var bodyParser      = require('body-parser');
 
-var app = express();
-var server = require(path.join(__dirname, 'bin/www'))(app, 9000);
-var io = require('socket.io')(server);
+var app             = express();
+var server          = require(path.join(__dirname, 'bin/www'))(app, 9000);
+var io              = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,7 +29,7 @@ app.use('/public', require('./routes/public'));
 app.use('/private', require('./routes/private'))
 app.use(require('./routes/index'));
 
-// socket.io 
+// socket.io
 require(path.join(__dirname, 'helpers/chat'))(io);
 
 /// catch 404 and forward to error handler
