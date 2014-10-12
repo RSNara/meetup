@@ -1,5 +1,18 @@
 extends layout
 
+block javascripts
+	script(src="/jquery/dist/jquery.min.js")
+	script(src="/javascripts/home.js")
+
 block content
-  h1= title
-  p Welcome to #{title}
+
+	.row
+		.cow-xs-12
+			h1= "Welcome to your MeetUp!"
+
+		.cos-xd-12
+			form#meetup(role="form")
+				.form-group
+					input#roomName(type="text", placeholder="Enter the room name").form-control
+				input#public(type="button", value="Public").btn.btn-default
+				input#private(type="button", value="Private", disabled="disabled").btn.btn-default

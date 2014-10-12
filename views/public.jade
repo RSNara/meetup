@@ -1,0 +1,12 @@
+extends meetup
+
+block greeting
+	if (! name)
+		h1= "Welcome to your public MeetUp!"
+	else 
+		h1= "Welcome to " + name + "!"
+
+block logic
+	script(src="/javascripts/chats.js")
+	script.
+		handleChats('/public', "#{name}");
