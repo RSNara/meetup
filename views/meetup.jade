@@ -1,0 +1,26 @@
+extends layout
+
+block stylesheets
+	link(rel="stylesheet", href="/stylesheets/meetup.css")
+
+block content
+
+
+	block greeting
+		h1= "Welcome to your MeetUp!"
+
+	#chatHistory
+
+	nav.navbar.navbar-fixed-bottom.navbar-default
+		form(autocomplete="off", onsubmit="return false;", role="form").navbar-form.navbar-left.container-fluid.fullwidth
+			.row
+				.form-group.col-xs-10
+					label(for="message").sr-only Enter Username:
+					input#message(type="text", placeholder="Enter Username").form-control.fullwidth
+				.col-xs-2
+					button#send(type="button").btn.btn-default.fullwidth Join Room
+
+block javascripts
+	script(src="/socket.io/socket.io.js" type="text/javascript")
+	script(src="/javascripts/meetup.js" type="text/javascript")
+	block logic

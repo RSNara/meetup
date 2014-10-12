@@ -1,0 +1,9 @@
+extends meetup
+
+block greeting
+	h1= "Welcome to your private MeetUp!"
+
+block logic
+	script(src="/javascripts/chats.js")
+	script.
+		handleChats('/private');
