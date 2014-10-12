@@ -6,9 +6,14 @@ block javascripts
 
 block content
 
-	h1= "Welcome to your MeetUp!"
+	.row
+		.cow-xs-12
+			h1= "Welcome to your MeetUp!"
 
-	form#meetup
-		input#roomName(type="text")
-		input#public(type="button", value="Public")
-		input#private(type="button", value="Private", disabled="disabled")
+		.cos-xd-12
+			form#meetup(role="form")
+				.form-group
+					input#roomName(type="text", placeholder="Enter the room name").form-control
+				.form-group
+					input#public(type="button", value="Public").btn.btn-default
+					input#private(type="button", value="Private", disabled="disabled").btn.btn-default
