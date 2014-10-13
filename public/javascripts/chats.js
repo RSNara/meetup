@@ -21,20 +21,27 @@ function handleChats(namespace, room) {
 		$("form button#send").click(function (e){
 			socket.emit('message', $("form input#message").val());
 			$("form input#message").val('');
-		})
+		});
 
-	})
+	});
 
 	$(document).keypress(function (e){
 	    (e.which === 13) && $("form button#send").click();
-	})
+	});
 
 	socket.on("message", function (message){
 		showMessage(message);
-	})
+	});
 
 	socket.on("chat history", function (history){
 		history.forEach(showMessage);
-	})
+	});
 
 }
+
+$(function(){
+	$(window).on('resize', (function resize() {
+		$("#chatHistory").width($(".container").width());
+		return resize;
+	}()));
+});
