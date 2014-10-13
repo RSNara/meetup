@@ -40,8 +40,13 @@ function handleChats(namespace, room) {
 }
 
 $(function(){
+
+	// make #chatHistory resize with the window
 	$(window).on('resize', (function resize() {
 		$("#chatHistory").width($(".container").width());
 		return resize;
 	}()));
+
+	// set up perfect scrollbar
+	$("#chatHistory").perfectScrollbar();
 });
