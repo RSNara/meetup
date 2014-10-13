@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "bootstrap": "~3.2.0"
+    "bootstrap": "~3.2.0",
+    "perfect-scrollbar": "~0.5.2"
   }
 }
